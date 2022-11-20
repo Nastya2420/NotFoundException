@@ -12,11 +12,14 @@ public class ProductRepository {
         products = tmp;
     }
 
+    public Product[] findAll() {
+        return products;
+    }
+
     public void removeById(int id) {
-        if (id < 0) {
+        if (findById(id) == null) {
             throw new NegativeIdException(
-                    "ID не может быть отрицательным: " + id
-            );
+                    "ID не найден " + id);
         }
         Product[] tmp = new Product[products.length - 1];
         int copy = 0;
@@ -29,9 +32,6 @@ public class ProductRepository {
         products = tmp;
     }
 
-    public Product[] findAll() {
-        return products;
-    }
 
     public Product findById(int id) {
         for (Product product : products) {

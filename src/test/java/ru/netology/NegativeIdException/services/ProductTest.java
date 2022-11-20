@@ -19,7 +19,7 @@ public class ProductTest {
 
 
     @Test
-    public void removingANegativeValue() {
+    public void productRepositoryFindById() {
         repository.save(book1);
         repository.save(book2);
         repository.save(book3);
@@ -28,7 +28,21 @@ public class ProductTest {
         repository.save(product1);
         repository.save(product2);
         Assertions.assertThrows(NegativeIdException.class, () -> {
-            repository.removeById(-34);
+            repository.removeById(34);
+        });
+    }
+
+    @Test
+    public void productRepositoryFindById1() {
+        repository.save(book1);
+        repository.save(book2);
+        repository.save(book3);
+        repository.save(smartphone1);
+        repository.save(smartphone2);
+        repository.save(product1);
+        repository.save(product2);
+        Assertions.assertThrows(NegativeIdException.class, () -> {
+            repository.removeById(10);
         });
     }
 
@@ -47,44 +61,6 @@ public class ProductTest {
         Assertions.assertArrayEquals(expected, actual);
 
     }
-
-    @Test
-    public void doesNotFindById() {
-        repository.save(book1);
-        repository.save(book2);
-        repository.save(book3);
-        repository.save(smartphone1);
-        repository.save(smartphone2);
-        repository.save(product1);
-        repository.save(product2);
-        Product expected = null;
-        int id = 54;
-        Assertions.assertEquals(expected, repository.findById(id));
-    }
-
-
-    @Test
-    public void suitableId() {
-        repository.save(book1);
-        repository.save(book2);
-        repository.save(book3);
-        repository.save(smartphone1);
-        repository.save(smartphone2);
-        repository.save(product1);
-        repository.save(product2);
-
-        Product expected = book3;
-        int id = 3;
-        Assertions.assertEquals(expected, repository.findById(id));
-
-    }
-
-
-
-
-
-
-
 
 
     @Test
